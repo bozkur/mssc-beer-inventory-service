@@ -1,10 +1,13 @@
 package guru.springframework.msscbeerinventoryservice.domain;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
 
 import java.sql.Timestamp;
 import java.util.UUID;
@@ -26,6 +29,8 @@ public class BeerInventory extends BaseEntity {
         this.quantityInHand = quantityInHand;
     }
 
+    @JdbcTypeCode(SqlTypes.VARCHAR)
+    @Column(length = 36, columnDefinition = "varchar(36)")
     private UUID beerId;
     private String upc;
     private Integer quantityInHand = 0;
