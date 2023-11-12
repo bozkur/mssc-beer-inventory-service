@@ -60,7 +60,7 @@ class BeerInventoryControllerTest {
         return BeerInventory.builder()
                 .id(UUID.randomUUID())
                 .beerId(beerId)
-                .quantityInHand(10)
+                .quantityOnHand(10)
                 .build();
     }
 }

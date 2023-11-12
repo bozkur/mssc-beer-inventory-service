@@ -22,16 +22,16 @@ import java.util.UUID;
 public class BeerInventory extends BaseEntity {
 
     @Builder
-    public BeerInventory(UUID id, Long version, Timestamp createdDate, Timestamp lastModifiedDate, UUID beerId, String upc, Integer quantityInHand) {
+    public BeerInventory(UUID id, Long version, Timestamp createdDate, Timestamp lastModifiedDate, UUID beerId, String upc, Integer quantityOnHand) {
         super(id, version, createdDate, lastModifiedDate);
         this.beerId = beerId;
         this.upc = upc;
-        this.quantityInHand = quantityInHand;
+        this.quantityOnHand = quantityOnHand;
     }
 
     @JdbcTypeCode(SqlTypes.VARCHAR)
     @Column(length = 36, columnDefinition = "varchar(36)")
     private UUID beerId;
     private String upc;
-    private Integer quantityInHand = 0;
+    private Integer quantityOnHand = 0;
 }

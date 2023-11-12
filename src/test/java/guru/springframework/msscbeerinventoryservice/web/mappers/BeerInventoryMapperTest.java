@@ -38,14 +38,14 @@ class BeerInventoryMapperTest {
                 .id(UUID.randomUUID())
                 .createdDate(Timestamp.from(Instant.now()))
                 .lastModifiedDate(Timestamp.from(Instant.now()))
-                .quantityInHand(50)
+                .quantityOnHand(50)
                 .build();
 
         BeerInventoryDto dto = mapper.inventoryToDto(domain);
 
         assertThat(dto.getBeerId(), Matchers.equalTo(domain.getBeerId()));
         assertThat(dto.getId(), Matchers.equalTo(domain.getId()));
-        assertThat(dto.getQuantityInHand(), Matchers.equalTo(domain.getQuantityInHand()));
+        assertThat(dto.getQuantityOnHand(), Matchers.equalTo(domain.getQuantityOnHand()));
         assertThat(dto.getCreatedDate(), Matchers.equalTo(dateMapper.timeStamp2OffsetDateTime(domain.getCreatedDate())));
         assertThat(dto.getLastModifiedDate(), Matchers.equalTo(dateMapper.timeStamp2OffsetDateTime(domain.getLastModifiedDate())));
 
@@ -58,7 +58,7 @@ class BeerInventoryMapperTest {
         BeerInventoryDto dto = BeerInventoryDto.builder()
                 .beerId(UUID.randomUUID())
                 .id(UUID.randomUUID())
-                .quantityInHand(50)
+                .quantityOnHand(50)
                 .createdDate(OffsetDateTime.now())
                 .lastModifiedDate(OffsetDateTime.now())
                 .build();
@@ -67,7 +67,7 @@ class BeerInventoryMapperTest {
 
         assertThat(domain.getBeerId(), Matchers.equalTo(dto.getBeerId()));
         assertThat(domain.getId(), Matchers.equalTo(dto.getId()));
-        assertThat(domain.getQuantityInHand(), Matchers.equalTo(dto.getQuantityInHand()));
+        assertThat(domain.getQuantityOnHand(), Matchers.equalTo(dto.getQuantityOnHand()));
         assertThat(domain.getCreatedDate(), Matchers.equalTo(dateMapper.offsetDateTime2TimeStamp(dto.getCreatedDate())));
         assertThat(domain.getLastModifiedDate(), Matchers.equalTo(dateMapper.offsetDateTime2TimeStamp(dto.getLastModifiedDate())));
 

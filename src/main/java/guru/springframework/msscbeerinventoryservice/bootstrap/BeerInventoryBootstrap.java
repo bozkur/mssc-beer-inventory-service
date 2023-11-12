@@ -41,6 +41,6 @@ public class BeerInventoryBootstrap implements CommandLineRunner {
     private void createBeerInventoryItem(UUID uuid, String upc) {
         beerInventoryRepository.save(BeerInventory
                 .builder()
-                .beerId(uuid).upc(upc).quantityInHand(50).build());
+                .beerId(uuid).upc(upc).quantityOnHand(50).build());
     }
 }
