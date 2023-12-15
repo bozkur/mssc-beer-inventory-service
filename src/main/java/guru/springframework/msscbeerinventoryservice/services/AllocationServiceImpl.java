@@ -23,7 +23,7 @@ public class AllocationServiceImpl implements AllocationService {
 
     @Override
     public Boolean allocateOrder(BeerOrderDto beerOrderDto) {
-        log.debug("Allocating OrderId: " + beerOrderDto.getId());
+        log.debug("Allocating OrderId: {}", beerOrderDto.getId());
 
         AtomicInteger totalOrdered = new AtomicInteger();
         AtomicInteger totalAllocated = new AtomicInteger();
@@ -37,9 +37,23 @@ public class AllocationServiceImpl implements AllocationService {
             totalAllocated.set(totalAllocated.get() + (beerOrderLine.getQuantityAllocated() != null ? beerOrderLine.getQuantityAllocated() : 0));
         });
 
-        log.debug("Total Ordered: " + totalOrdered.get() + " Total Allocated: " + totalAllocated.get());
+        log.debug("Total Ordered: {} Total Allocated: {}", totalOrdered.get(), totalAllocated.get());
 
         return totalOrdered.get() == totalAllocated.get();
+    }
+
+    @Override
+    public void deallocateOrder(BeerOrderDto beerOrderDto) {
+        List<BeerOrderLineDto> beerOrderLines = beerOrderDto.getBeerOrderLines();
+        beerOrderLines.forEach(bol -> {
+            BeerInventory inventory = BeerInventory.builder()
+                    .upc(bol.getUpc())
+                    .beerId(bol.getBeerId())
+                    .quantityOnHand(bol.getQuantityAllocated())
+                    .build();
+            beerInventoryRepository.save(inventory);
+            log.debug("Saved inventory for beer upc: {} Inventory id:{} ", inventory.getUpc(), inventory.getId());
+        });
     }
 
     private void allocateBeerOrderLine(BeerOrderLineDto beerOrderLine) {
