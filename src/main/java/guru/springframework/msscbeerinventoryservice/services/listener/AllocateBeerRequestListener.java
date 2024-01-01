@@ -1,7 +1,7 @@
 package guru.springframework.msscbeerinventoryservice.services.listener;
 
-import guru.springframework.brewery.model.event.AllocateBeerOrderRequest;
-import guru.springframework.brewery.model.event.AllocateBeerOrderResult;
+import guru.springframework.brewery.model.events.AllocateBeerOrderRequest;
+import guru.springframework.brewery.model.events.AllocateBeerOrderResult;
 import guru.springframework.msscbeerinventoryservice.config.JmsConfig;
 import guru.springframework.msscbeerinventoryservice.services.AllocationService;
 import jakarta.transaction.Transactional;

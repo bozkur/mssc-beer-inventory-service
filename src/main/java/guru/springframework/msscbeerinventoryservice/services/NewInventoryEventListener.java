@@ -3,7 +3,7 @@ package guru.springframework.msscbeerinventoryservice.services;
 import guru.springframework.msscbeerinventoryservice.config.JmsConfig;
 import guru.springframework.msscbeerinventoryservice.domain.BeerInventory;
 import guru.springframework.msscbeerinventoryservice.repositories.BeerInventoryRepository;
-import guru.springframework.brewery.model.event.NewInventoryEvent;
+import guru.springframework.brewery.model.events.NewInventoryEvent;
 import guru.springframework.brewery.model.BeerDto;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;

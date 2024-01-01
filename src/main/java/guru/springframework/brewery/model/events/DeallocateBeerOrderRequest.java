@@ -1,4 +1,4 @@
-package guru.springframework.brewery.model.event;
+package guru.springframework.brewery.model.events;
 
 import guru.springframework.brewery.model.BeerOrderDto;
 import lombok.Data;
