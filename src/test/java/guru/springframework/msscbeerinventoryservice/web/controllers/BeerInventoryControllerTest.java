@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Import;
+import org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
@@ -43,7 +44,8 @@ class BeerInventoryControllerTest {
         UUID beerId = UUID.randomUUID();
         when(beerInventoryRepository.findAllByBeerId(beerId)).thenReturn(createInventoryItems(beerId));
 
-        mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/beer/{beerId}/inventory", beerId.toString()))
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/beer/{beerId}/inventory", beerId.toString())
+                        .with(SecurityMockMvcRequestPostProcessors.httpBasic("good", "beer")))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.size()", Matchers.equalTo(2)))
                 .andExpect(MockMvcResultMatchers.jsonPath("$[0].beerId", Matchers.equalTo(beerId.toString())))
